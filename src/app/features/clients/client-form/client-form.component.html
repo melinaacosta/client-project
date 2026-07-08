@@ -1,1 +1,32 @@
-<p>client-form works!</p>
+<div class="form-container">
+  <h2>Nuevo cliente</h2>
+  <form [formGroup]="clientForm" (ngSubmit)="submit()">
+    <mat-form-field>
+      <mat-label>Nombre</mat-label>
+      <input matInput formControlName="name" />
+
+      <mat-error *ngIf="clientForm.get('name')?.hasError('required')">
+        Nombre requerido
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Apellido</mat-label>
+      <input matInput formControlName="lastName" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Edad</mat-label>
+      <input matInput type="number" formControlName="age" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Fecha de nacimiento</mat-label>
+      <input matInput type="date" formControlName="birthDate" />
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit">
+      Guardar cliente
+    </button>
+  </form>
+</div>
