@@ -1,0 +1,38 @@
+.stat-card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+  padding: 24px;
+  min-width: 260px;
+  border-radius: 18px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.icon-container {
+  width: 55px;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #eef2ff;
+}
+
+.icon-container mat-icon {
+  font-size: 30px;
+  width: 30px;
+  height: 30px;
+}
+
+.title {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+h2 {
+  margin: 8px 0 0;
+  font-size: 28px;
+  font-weight: 700;
+  color: #111827;
+}
