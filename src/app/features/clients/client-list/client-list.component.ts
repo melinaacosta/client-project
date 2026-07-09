@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -10,6 +10,7 @@ import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 import { ClientFormComponent } from '../client-form/client-form.component';
 import { DateFormatPipe } from 'src/app/shared/pipes/date-format';
 import { ClientService } from 'src/app/core/services/clients.service';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-client-list',
@@ -28,17 +29,18 @@ import { ClientService } from 'src/app/core/services/clients.service';
   styleUrls: ['./client-list.component.scss'],
 })
 export class ClientListComponent implements OnInit {
-  dataSource = new MatTableDataSource<Client>();
-  displayedColumns = ['name', 'lastName', 'age', 'birthDate'];
+  protected dataSource = new MatTableDataSource<Client>();
+  protected displayedColumns = ['name', 'lastName', 'age', 'birthDate'];
 
-  constructor(
-    private dialog: MatDialog,
-    private clientService: ClientService,
-  ) {}
+  private readonly dialog = inject(MatDialog);
+  private readonly clientService = inject(ClientService);
+
+  @ViewChild(MatSort) sort!: MatSort;
 
   ngOnInit(): void {
-    this.clientService.getClients().subscribe((clients) => {
+    this.clientService.getClients().subscribe((clients: Client[]) => {
       this.dataSource.data = clients;
+      this.dataSource.sort = this.sort;
     });
   }
 
@@ -46,5 +48,10 @@ export class ClientListComponent implements OnInit {
     this.dialog.open(ClientFormComponent, {
       width: '500px',
     });
+  }
+
+  applyFilter(event: Event): void {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 }

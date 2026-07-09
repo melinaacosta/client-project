@@ -7,11 +7,15 @@
     </button>
   </div>
 
-  <!-- <mat-form-field appearance="outline">
+  <mat-form-field appearance="outline">
     <mat-label>Buscar cliente</mat-label>
 
-    <input matInput placeholder="Nombre o apellido" />
-  </mat-form-field> -->
+    <input
+      matInput
+      (keyup)="applyFilter($event)"
+      placeholder="Nombre o apellido"
+    />
+  </mat-form-field>
 
   <table mat-table [dataSource]="dataSource" matSort>
     <ng-container matColumnDef="name">
