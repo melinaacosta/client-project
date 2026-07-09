@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormControl,
@@ -32,10 +32,10 @@ import { ClientService } from 'src/app/core/services/clients.service';
 export class ClientFormComponent {
   clientForm: FormGroup;
 
-  constructor(
-    private dialogRef: MatDialogRef<ClientFormComponent>,
-    private clientService: ClientService,
-  ) {
+  private readonly dialogRef = inject(MatDialogRef<ClientFormComponent>);
+  private readonly clientService = inject(ClientService);
+
+  constructor() {
     this.clientForm = new FormGroup({
       name: new FormControl('', [
         Validators.required,
@@ -70,14 +70,13 @@ export class ClientFormComponent {
     }
 
     const client = this.clientForm.getRawValue();
-    console.log('Cliente a guardar:', client);
 
     this.clientService
       .addClient(client)
       .then(() => {
         this.dialogRef.close(true);
       })
-      .catch((error) => {
+      .catch((error: Error) => {
         console.error('Error al guardar cliente', error);
       });
   }
