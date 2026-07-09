@@ -1,27 +1,173 @@
-# ClientProject
+# Client Manager
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.11.
+Aplicación web para la gestión y análisis de clientes desarrollada con Angular.
 
-## Development server
+Permite registrar clientes, visualizar la información almacenada en Firebase Firestore y obtener métricas estadísticas sobre los datos registrados.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## 🚀 Demo
 
-## Code scaffolding
+Aplicación desplegada en Firebase Hosting:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+🔗 https://client-manager-17218.web.app/
 
-## Build
+---
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## 📋 Funcionalidades
 
-## Running unit tests
+### Gestión de clientes
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- Visualización de clientes registrados.
+- Registro de nuevos clientes.
+- Persistencia de datos utilizando Firebase Firestore.
 
-## Running end-to-end tests
+### Tabla de clientes
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Listado de clientes utilizando Angular Material Table.
 
-## Further help
+Incluye:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+- 🔎 Búsqueda por nombre y apellido.
+- ↕️ Ordenamiento por columnas:
+  - Nombre.
+  - Apellido.
+  - Edad.
+
+---
+
+## 📊 Análisis de datos
+
+La aplicación calcula métricas estadísticas sobre las edades de los clientes registrados.
+
+### Edad promedio
+
+Representa la edad media de todos los clientes.
+
+Fórmula:
+
+```
+Suma de todas las edades / cantidad de clientes
+```
+
+Ejemplo:
+
+Clientes:
+
+```
+58, 34, 18
+```
+
+Cálculo:
+
+```
+(58 + 34 + 18) / 3 = 36.7
+```
+
+Resultado:
+
+```
+Edad promedio: 36.7 años
+```
+
+---
+
+### Desviación estándar
+
+La desviación estándar permite conocer qué tan dispersas están las edades respecto al promedio.
+
+Interpretación:
+
+- Una desviación estándar baja indica que las edades son similares.
+- Una desviación estándar alta indica que existe mayor diferencia entre las edades.
+
+El cálculo se realiza mediante:
+
+1. Obtención del promedio de edades.
+2. Cálculo de la distancia de cada edad respecto al promedio.
+3. Cálculo de la varianza.
+4. Obtención de la raíz cuadrada para obtener la desviación estándar.
+
+Ejemplo:
+
+```
+Edades:
+58, 34, 18
+
+Edad promedio:
+36.7 años
+
+Desviación estándar:
+16.4 años
+```
+
+---
+
+## 🛠️ Tecnologías utilizadas
+
+- Angular 15
+- TypeScript
+- Angular Material
+- Firebase Firestore
+- Firebase Hosting
+- RxJS
+
+---
+
+## 📁 Estructura del proyecto
+
+```
+src/app
+│
+├── core
+│   ├── models
+│   └── services
+│
+├── features
+│   └── clients
+│       ├── client-list
+│       └── client-form
+│
+├── shared
+│   ├── components
+│   └── pipes
+│
+└── environments
+```
+
+### Organización
+
+**Core**
+- Contiene modelos y servicios principales de la aplicación.
+
+**Features**
+- Contiene las funcionalidades agrupadas por dominio.
+
+**Shared**
+- Contiene componentes y elementos reutilizables.
+
+---
+
+## 🔥 Firebase
+
+La aplicación utiliza Firebase Firestore como base de datos.
+
+Configuración:
+
+- Firebase SDK 9
+- AngularFire 7.5
+
+Firestore permite:
+
+- Guardar clientes.
+- Consultar clientes.
+- Actualizar información en tiempo real.
+
+---
+
+## 🧠 Decisiones técnicas
+
+- Se utilizó arquitectura **Standalone Components** de Angular.
+- Se separó la lógica de negocio mediante servicios.
+- Se utilizó Firebase Firestore para almacenamiento persistente.
+- Se implementó manejo de suscripciones con `takeUntil` para evitar fugas de memoria.
+- Se utilizó Angular Material para construir una interfaz consistente y reutilizable.
+- Se organizaron las funcionalidades siguiendo una estructura basada en dominios (`core`, `features`, `shared`).
