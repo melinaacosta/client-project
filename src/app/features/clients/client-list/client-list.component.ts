@@ -8,6 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { Client } from 'src/app/core/models/client.model';
 import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 import { ClientFormComponent } from '../client-form/client-form.component';
+import { DateFormatPipe } from 'src/app/shared/pipes/date-format';
 
 @Component({
   selector: 'app-client-list',
@@ -20,6 +21,7 @@ import { ClientFormComponent } from '../client-form/client-form.component';
     MatFormFieldModule,
     MatIconModule,
     MatDialogModule,
+    DateFormatPipe,
   ],
   templateUrl: './client-list.component.html',
   styleUrls: ['./client-list.component.scss'],

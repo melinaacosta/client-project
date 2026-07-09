@@ -42,7 +42,7 @@
       <th mat-header-cell *matHeaderCellDef>Fecha nacimiento</th>
 
       <td mat-cell *matCellDef="let client">
-        {{ client.birthDate | date }}
+        {{ client.birthDate | dateFormat }}
       </td>
     </ng-container>
 

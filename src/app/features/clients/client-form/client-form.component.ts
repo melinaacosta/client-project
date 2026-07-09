@@ -33,10 +33,29 @@ export class ClientFormComponent {
 
   constructor(private dialogRef: MatDialogRef<ClientFormComponent>) {
     this.clientForm = new FormGroup({
-      name: new FormControl('', Validators.required),
-      lastName: new FormControl(''),
-      age: new FormControl(''),
-      birthDate: new FormControl(''),
+      name: new FormControl('', [
+        Validators.required,
+        Validators.minLength(2),
+        Validators.maxLength(50),
+        Validators.pattern(/^[a-zA-ZÀ-ÿ\s]+$/),
+      ]),
+      lastName: new FormControl('', [
+        Validators.required,
+        Validators.minLength(2),
+        Validators.maxLength(50),
+        Validators.pattern(/^[a-zA-ZÀ-ÿ\s]+$/),
+      ]),
+      age: new FormControl('', [
+        Validators.required,
+        Validators.min(0),
+        Validators.max(120),
+      ]),
+      birthDate: new FormControl('', [
+        Validators.required,
+        Validators.pattern(
+          /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/,
+        ),
+      ]),
     });
   }
 
