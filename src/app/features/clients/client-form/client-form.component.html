@@ -1,5 +1,12 @@
 <div class="form-container">
-  <h2>Nuevo cliente</h2>
+  <div class="form-header">
+    <h2>Nuevo cliente</h2>
+
+    <button mat-icon-button type="button" (click)="close()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
   <form [formGroup]="clientForm" (ngSubmit)="submit()">
     <mat-form-field>
       <mat-label>Nombre</mat-label>

@@ -9,6 +9,9 @@ import {
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialogRef } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-client-form',
@@ -19,6 +22,8 @@ import { MatButtonModule } from '@angular/material/button';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    MatDialogModule,
+    MatIconModule,
   ],
   templateUrl: './client-form.component.html',
   styleUrls: ['./client-form.component.scss'],
@@ -26,7 +31,7 @@ import { MatButtonModule } from '@angular/material/button';
 export class ClientFormComponent {
   clientForm: FormGroup;
 
-  constructor() {
+  constructor(private dialogRef: MatDialogRef<ClientFormComponent>) {
     this.clientForm = new FormGroup({
       name: new FormControl('', Validators.required),
       lastName: new FormControl(''),
@@ -36,4 +41,8 @@ export class ClientFormComponent {
   }
 
   submit(): void {}
+
+  close(): void {
+    this.dialogRef.close();
+  }
 }
