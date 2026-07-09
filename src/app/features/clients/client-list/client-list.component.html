@@ -1,17 +1,17 @@
 <div class="container">
   <div class="header">
-    <h2>Clientes registrados</h2>
+    <h2>Clientes</h2>
     <button mat-raised-button color="primary" (click)="openCreateClient()">
       <mat-icon> add </mat-icon>
       Nuevo cliente
     </button>
   </div>
 
-  <mat-form-field appearance="outline">
+  <!-- <mat-form-field appearance="outline">
     <mat-label>Buscar cliente</mat-label>
 
     <input matInput placeholder="Nombre o apellido" />
-  </mat-form-field>
+  </mat-form-field> -->
 
   <table mat-table [dataSource]="dataSource" matSort>
     <ng-container matColumnDef="name">
