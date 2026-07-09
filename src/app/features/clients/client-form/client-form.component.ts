@@ -12,6 +12,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ClientService } from 'src/app/core/services/clients.service';
 
 @Component({
   selector: 'app-client-form',
@@ -31,7 +32,10 @@ import { MatDialogModule } from '@angular/material/dialog';
 export class ClientFormComponent {
   clientForm: FormGroup;
 
-  constructor(private dialogRef: MatDialogRef<ClientFormComponent>) {
+  constructor(
+    private dialogRef: MatDialogRef<ClientFormComponent>,
+    private clientService: ClientService,
+  ) {
     this.clientForm = new FormGroup({
       name: new FormControl('', [
         Validators.required,
@@ -59,7 +63,24 @@ export class ClientFormComponent {
     });
   }
 
-  submit(): void {}
+  submit(): void {
+    if (this.clientForm.invalid) {
+      this.clientForm.markAllAsTouched();
+      return;
+    }
+
+    const client = this.clientForm.getRawValue();
+    console.log('Cliente a guardar:', client);
+
+    this.clientService
+      .addClient(client)
+      .then(() => {
+        this.dialogRef.close(true);
+      })
+      .catch((error) => {
+        console.error('Error al guardar cliente', error);
+      });
+  }
 
   close(): void {
     this.dialogRef.close();

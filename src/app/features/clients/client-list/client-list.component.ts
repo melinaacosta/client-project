@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -9,6 +9,7 @@ import { Client } from 'src/app/core/models/client.model';
 import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 import { ClientFormComponent } from '../client-form/client-form.component';
 import { DateFormatPipe } from 'src/app/shared/pipes/date-format';
+import { ClientService } from 'src/app/core/services/clients.service';
 
 @Component({
   selector: 'app-client-list',
@@ -26,11 +27,20 @@ import { DateFormatPipe } from 'src/app/shared/pipes/date-format';
   templateUrl: './client-list.component.html',
   styleUrls: ['./client-list.component.scss'],
 })
-export class ClientListComponent {
+export class ClientListComponent implements OnInit {
   dataSource = new MatTableDataSource<Client>();
   displayedColumns = ['name', 'lastName', 'age', 'birthDate'];
 
-  constructor(private dialog: MatDialog) {}
+  constructor(
+    private dialog: MatDialog,
+    private clientService: ClientService,
+  ) {}
+
+  ngOnInit(): void {
+    this.clientService.getClients().subscribe((clients) => {
+      this.dataSource.data = clients;
+    });
+  }
 
   openCreateClient(): void {
     this.dialog.open(ClientFormComponent, {
