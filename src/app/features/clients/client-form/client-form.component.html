@@ -49,7 +49,7 @@
 
     <mat-form-field>
       <mat-label>Edad</mat-label>
-      <input matInput formControlName="age" />
+      <input matInput formControlName="age" type="number" />
       <mat-error *ngIf="clientForm.get('age')?.hasError('required')">
         Edad requerida
       </mat-error>
