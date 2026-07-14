@@ -64,6 +64,12 @@ export class ClientFormComponent {
     });
   }
 
+  preventInvalidKeys(event: KeyboardEvent): void {
+    if (['e', 'E', '+', '-'].includes(event.key)) {
+      event.preventDefault();
+    }
+  }
+
   submit(): void {
     if (this.clientForm.invalid) {
       this.clientForm.markAllAsTouched();
