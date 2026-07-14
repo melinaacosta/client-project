@@ -59,7 +59,7 @@
         Edad requerida
       </mat-error>
       <mat-error *ngIf="clientForm.get('age')?.hasError('min')">
-        La edad no puede ser negativa
+        La edad no puede ser negativa ni cero
       </mat-error>
       <mat-error *ngIf="clientForm.get('age')?.hasError('max')">
         La edad no puede superar los 120 años
