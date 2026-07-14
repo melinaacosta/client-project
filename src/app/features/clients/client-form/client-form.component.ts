@@ -53,6 +53,7 @@ export class ClientFormComponent {
         Validators.required,
         Validators.min(0),
         Validators.max(120),
+        Validators.pattern(/^[0-9]+$/),
       ]),
       birthDate: new FormControl('', [
         Validators.required,
