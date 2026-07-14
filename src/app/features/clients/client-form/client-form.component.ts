@@ -51,7 +51,7 @@ export class ClientFormComponent {
       ]),
       age: new FormControl('', [
         Validators.required,
-        Validators.min(0),
+        Validators.min(1),
         Validators.max(120),
         Validators.pattern(/^[0-9]+$/),
       ]),
